@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Skills Presentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --dark-bg: #1a1a2e;
+            --light-bg: #16213e;
+            --text-color: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.08);
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            padding-top: 100px;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        body[dir="rtl"] {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-btn {
+            background: rgba(67, 97, 238, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body[dir="rtl"] .language-btn {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .language-btn:hover {
+            background: rgba(67, 97, 238, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            margin-right: 8px;
+        }
+        
+        body[dir="rtl"] .language-btn i {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 100px 60px;
+            position: relative;
+            background: linear-gradient(135deg, var(--dark-bg), var(--light-bg));
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .section-header {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        body[dir="rtl"] .section-header::after {
+            left: auto;
+            right: 0;
+        }
+        
+        .speaker-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--accent-color);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body[dir="rtl"] .speaker-card {
+            border-left: none;
+            border-right: 5px solid var(--accent-color);
+        }
+        
+        .speaker-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .speaker-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .speaker-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        body[dir="rtl"] .speaker-title i {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+        
+        .content-text {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .media-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+            margin: 30px 0;
+            transition: all 0.4s;
+        }
+        
+        .media-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+        
+        .img-container {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+            max-height: 400px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+        }
+        
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .img-container:hover img {
+            transform: scale(1.08);
+        }
+        
+        .conclusion-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .thanks-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            margin: 50px 0;
+            background: linear-gradient(to right, #f72585, #4361ee);
+            background-clip: text ;-webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+        
+        .navbar {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            padding: 15px 0;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            margin: 0 10px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            background: rgba(67, 97, 238, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .nav-link.active {
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .resources-box {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        
+        .resource-item {
+            color: var(--primary-color);
+            display: block;
+            margin: 15px 0;
+            padding: 12px 20px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .resource-item:hover {
+            background: rgba(67, 97, 238, 0.2);
+            transform: translateX(10px);
+            color: var(--accent-color);
+        }
+        
+        body[dir="rtl"] .resource-item:hover {
+            transform: translateX(-10px);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 992px) {
+            .slide {
+                padding: 80px 30px;
+            }
+            
+            .section-header {
+                font-size: 2.2rem;
+            }
+            
+            .thanks-heading {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 70px 20px;
+            }
+            
+            .section-header {
+                font-size: 2rem;
+            }
+            
+            .thanks-heading {
+                font-size: 2.8rem;
+            }
+            
+            .language-switcher {
+                top: 70px;
+                right: 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="language-switcher">
+    <button id="languageBtn" class="language-btn">
+        <i class="fas fa-language"></i> عربي
+    </button>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-brain me-2"></i><span id="nav-title">Soft Skills Mastery</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#slide1"><i class="fas fa-home me-2"></i><span class="nav-text">Introduction</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#slide2"><i class="fas fa-balance-scale me-2"></i><span class="nav-text">Comparison</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#slide3"><i class="fas fa-lightbulb me-2"></i><span class="nav-text">Examples</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#slide4"><i class="fas fa-star me-2"></i><span class="nav-text">Importance</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#slide5"><i class="fas fa-flag me-2"></i><span class="nav-text">Conclusion</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Slide 1: Introduction -->
+<div id="slide1" class="slide">
+    <div class="container">
+        <h2 class="section-header animate__animated animate__fadeInDown" id="slide1-title">Introduction</h2>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="speaker-card animate__animated animate__fadeInLeft">
+                    <div class="speaker-title">
+                        <i class="fas fa-chalkboard-teacher"></i> <span class="speaker-role">Presenter</span>
+                    </div>
+                    <p class="content-text">Unlike hard skills which refer to technical knowledge, <span class="highlight">soft skills are personal traits and behaviors</span> that influence how effectively a person works both independently and in collaboration with others.</p>
+                </div>
+                
+                <div class="speaker-card animate__animated animate__fadeInLeft animate__delay-1s mt-4">
+                    <div class="speaker-title">
+                        <i class="fas fa-user-graduate"></i> <span class="speaker-role">Team Member 1</span>
+                    </div>
+                    <p class="content-text">In simple terms, <span class="highlight">hard skills may open the door to opportunity, but soft skills are what keep it open.</span> They are the differentiators that set exceptional professionals apart.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="media-container animate__animated animate__fadeInRight">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/d9MyW72ELq0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div class="img-container animate__animated animate__fadeInRight animate__delay-1s mt-4">
+                    <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team Collaboration">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 2: Comparison -->
+<div id="slide2" class="slide">
+    <div class="container">
+        <h2 class="section-header animate__animated animate__fadeInDown" id="slide2-title">Key Comparison</h2>
+        
+        <div class="row">
+            <div class="col-lg-6 order-lg-2">
+                <div class="speaker-card animate__animated animate__fadeInRight">
+                    <div class="speaker-title">
+                        <i class="fas fa-user-tie"></i> <span class="speaker-role">Team Member 2</span>
+                    </div>
+                    <p class="content-text">To better understand the value of soft skills, here are <span class="highlight">two key examples</span> that clarify their importance in professional settings.</p>
+                </div>
+                
+                <div class="speaker-card animate__animated animate__fadeInRight animate__delay-1s mt-4">
+                    <div class="speaker-title">
+                        <i class="fas fa-chart-line"></i> <span class="speaker-role">Team Member 3</span>
+                    </div>
+                    <p class="content-text">Today, <span class="highlight">87% of employers</span> prioritize soft skills over academic performance when making hiring decisions, according to LinkedIn's 2023 Global Talent Trends report.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 order-lg-1 mt-4 mt-lg-0">
+                <div class="img-container animate__animated animate__fadeInLeft">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Business Meeting">
+                </div>
+                
+                <div class="media-container animate__animated animate__fadeInLeft animate__delay-1s mt-4">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/HJl3sAuk2jk" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Examples -->
+<div id="slide3" class="slide">
+    <div class="container">
+        <h2 class="section-header animate__animated animate__fadeInDown" id="slide3-title">Core Examples</h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="speaker-card animate__animated animate__fadeInUp">
+                    <div class="speaker-title">
+                        <i class="fas fa-puzzle-piece"></i> <span class="speaker-role">Team Member 4</span>
+                    </div>
+                    <p class="content-text"><span class="highlight">Complex Problem Solving:</span> The ability to analyze challenging situations, identify components, and develop effective solutions. This includes critical thinking, creativity, and analytical reasoning.</p>
+                </div>
+                
+                <div class="img-container animate__animated animate__fadeInUp animate__delay-1s mt-4">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Problem Solving">
+                </div>
+            </div>
+            
+            <div class="col-md-6 mt-4 mt-md-0">
+                <div class="speaker-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="speaker-title">
+                        <i class="fas fa-clock"></i> <span class="speaker-role">Team Member 5</span>
+                    </div>
+                    <p class="content-text"><span class="highlight">Effective Time Management:</span> Imagine preparing for exams by starting early, following a structured schedule, and using techniques like the Pomodoro method. This discipline translates directly to workplace productivity.</p>
+                </div>
+                
+                <div class="img-container animate__animated animate__fadeInUp animate__delay-2s mt-4">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Time Management">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Importance -->
+<div id="slide4" class="slide">
+    <div class="container">
+        <h2 class="section-header animate__animated animate__fadeInDown" id="slide4-title">Why It Matters</h2>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="speaker-card animate__animated animate__fadeInLeft">
+                    <div class="speaker-title">
+                        <i class="fas fa-bullseye"></i> <span class="speaker-role">Team Member 6</span>
+                    </div>
+                    <p class="content-text">Soft skills are <span class="highlight">the bridge between knowledge and action</span>. They enable professionals to communicate vision, collaborate effectively, and adapt to changing workplace dynamics.</p>
+                </div>
+                
+                <div class="speaker-card animate__animated animate__fadeInLeft animate__delay-1s mt-4">
+                    <div class="speaker-title">
+                        <i class="fas fa-exclamation-triangle"></i> <span class="speaker-role">Team Member 7</span>
+                    </div>
+                    <p class="content-text">Consider a highly qualified candidate with an impressive CV who <span class="highlight">struggles with feedback and avoids teamwork</span>. Despite technical expertise, their career growth will be severely limited without soft skills.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="media-container animate__animated animate__fadeInRight">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/6RfFgMzRhUo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div class="resources-box animate__animated animate__fadeInRight animate__delay-1s mt-4">
+                    <h5 class="speaker-title"><i class="fas fa-book-open me-2"></i><span id="resources-title">Recommended Resources:</span></h5>
+                    <a href="https://www.indeed.com/career-advice/resumes-cover-letters/soft-skills" class="resource-item" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i><span class="resource-text">Indeed's Soft Skills Guide</span>
+                    </a>
+                    <a href="https://www.themuse.com/advice/soft-skills-list" class="resource-item" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i><span class="resource-text">The Muse: Essential Soft Skills</span>
+                    </a>
+                    <a href="https://www.forbes.com/sites/ashleystahl/2021/06/29/the-7-most-important-soft-skills-to-land-your-dream-job" class="resource-item" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i><span class="resource-text">Forbes: Top 7 Soft Skills</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Conclusion -->
+<div id="slide5" class="slide">
+    <div class="container">
+        <div class="conclusion-section animate__animated animate__zoomIn">
+            <h2 class="section-header" style="color: white; text-align: center;" id="slide5-title">Key Takeaways</h2>
+            
+            <div class="speaker-card" style="background: rgba(255,255,255,0.15);">
+                <div class="speaker-title" style="color: white;">
+                    <i class="fas fa-flag"></i> <span class="speaker-role">Team Member 8</span>
+                </div>
+                <p class="content-text">Our research clearly shows that <span class="highlight">hard work and technical knowledge alone are insufficient</span> for career success. The professionals who thrive are those who complement their expertise with <span class="highlight">strong communication, emotional intelligence, and adaptability</span>.</p>
+            </div>
+            
+            <div class="thanks-heading animate__animated animate__pulse animate__infinite" id="thanks-text">
+                THANK YOU
+            </div>
+            
+            <div class="text-center">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                     alt="Team Photo" class="img-thumbnail rounded-circle" style="width: 150px; border: 3px solid white;">
+            </div>
+            
+            <div class="text-center mt-4">
+                <h4 id="university-name">Delta Technological University</h4>
+                <p id="presenter-name">Presented by: Muntaser Hamdi Mohamed Eid</p>
+                <p>April 22, 2025</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Translation data
+    const translations = {
+        en: {
+            navTitle: "Soft Skills Mastery",
+            navItems: ["Introduction", "Comparison", "Examples", "Importance", "Conclusion"],
+            slideTitles: ["Introduction", "Key Comparison", "Core Examples", "Why It Matters", "Key Takeaways"],
+            speakerRoles: ["Presenter", "Team Member 1", "Team Member 2", "Team Member 3", "Team Member 4", 
+                          "Team Member 5", "Team Member 6", "Team Member 7", "Team Member 8"],
+            content: {
+                slide1: [
+                    "Unlike hard skills which refer to technical knowledge, <span class='highlight'>soft skills are personal traits and behaviors</span> that influence how effectively a person works both independently and in collaboration with others.",
+                    "In simple terms, <span class='highlight'>hard skills may open the door to opportunity, but soft skills are what keep it open.</span> They are the differentiators that set exceptional professionals apart."
+                ],
+                slide2: [
+                    "To better understand the value of soft skills, here are <span class='highlight'>two key examples</span> that clarify their importance in professional settings.",
+                    "Today, <span class='highlight'>87% of employers</span> prioritize soft skills over academic performance when making hiring decisions, according to LinkedIn's 2023 Global Talent Trends report."
+                ],
+                slide3: [
+                    "<span class='highlight'>Complex Problem Solving:</span> The ability to analyze challenging situations, identify components, and develop effective solutions. This includes critical thinking, creativity, and analytical reasoning.",
+                    "<span class='highlight'>Effective Time Management:</span> Imagine preparing for exams by starting early, following a structured schedule, and using techniques like the Pomodoro method. This discipline translates directly to workplace productivity."
+                ],
+                slide4: [
+                    "Soft skills are <span class='highlight'>the bridge between knowledge and action</span>. They enable professionals to communicate vision, collaborate effectively, and adapt to changing workplace dynamics.",
+                    "Consider a highly qualified candidate with an impressive CV who <span class='highlight'>struggles with feedback and avoids teamwork</span>. Despite technical expertise, their career growth will be severely limited without soft skills."
+                ],
+                slide5: [
+                    "Our research clearly shows that <span class='highlight'>hard work and technical knowledge alone are insufficient</span> for career success. The professionals who thrive are those who complement their expertise with <span class='highlight'>strong communication, emotional intelligence, and adaptability</span>."
+                ],
+                resources: {
+                    title: "Recommended Resources:",
+                    items: [
+                        "Indeed's Soft Skills Guide",
+                        "The Muse: Essential Soft Skills",
+                        "Forbes: Top 7 Soft Skills"
+                    ]
+                },
+                thanks: "THANK YOU",
+                university: "Delta Technological University",
+                presenter: "Presented by: Muntaser Hamdi Mohamed Eid"
+            }
+        },
+        ar: {
+            navTitle: "إتقان المهارات الناعمة",
+            navItems: ["المقدمة", "المقارنة", "الأمثلة", "الأهمية", "الخاتمة"],
+            slideTitles: ["المقدمة", "المقارنة الرئيسية", "أمثلة أساسية", "أهميتها", "الاستنتاجات الرئيسية"],
+            speakerRoles: ["المقدم", "عضو الفريق 1", "عضو الفريق 2", "عضو الفريق 3", "عضو الفريق 4", 
+                          "عضو الفريق 5", "عضو الفريق 6", "عضو الفريق 7", "عضو الفريق 8"],
+            content: {
+                slide1: [
+                    "على عكس المهارات الصلبة التي تشير إلى المعرفة التقنية، فإن <span class='highlight'>المهارات الناعمة هي السمات الشخصية والسلوكيات</span> التي تؤثر على مدى فاعلية الشخص في العمل بشكل مستقل وأيضًا في التعاون مع الآخرين.",
+                    "ببساطة، <span class='highlight'>قد تفتح المهارات الصلبة باب الفرصة، لكن المهارات الناعمة هي ما يُبقيه مفتوحًا.</span> إنها العوامل المميزة التي تفصل المحترفين المتميزين عن غيرهم."
+                ],
+                slide2: [
+                    "لفهم قيمة المهارات الناعمة بشكل أفضل، إليك <span class='highlight'>مثالين رئيسيين</span> يوضحان أهميتها في البيئات المهنية.",
+                    "اليوم، <span class='highlight'>87% من أصحاب العمل</span> يفضلون المهارات الناعمة على الأداء الأكاديمي عند اتخاذ قرارات التوظيف، وفقًا لتقرير اتجاهات المواهب العالمية لـ LinkedIn 2023."
+                ],
+                slide3: [
+                    "<span class='highlight'>حل المشكلات المعقدة:</span> القدرة على تحليل المواقف الصعبة، وتحديد مكوناتها، وتطوير حلول فعالة. وهذا يشمل التفكير النقدي، والإبداع، والتحليل المنطقي.",
+                    "<span class='highlight'>الإدارة الفعالة للوقت:</span> تخيل التحضير للامتحانات عن طريق البدء مبكرًا، واتباع جدول زمني منظم، واستخدام تقنيات مثل طريقة بومودورو. هذا الانضباط يترجم مباشرة إلى إنتاجية في مكان العمل."
+                ],
+                slide4: [
+                    "المهارات الناعمة هي <span class='highlight'>الجسر بين المعرفة والعمل</span>. إنها تمكن المحترفين من توصيل الرؤية، والتعاون بفعالية، والتكيف مع ديناميكيات مكان العمل المتغيرة.",
+                    "فكر في مرشح مؤهل للغاية مع سيرة ذاتية مثيرة للإعجاب <span class='highlight'>يعاني في التعامل مع الملاحظات ويتجنب العمل الجماعي</span>. على الرغم من الخبرة الفنية، فإن نموهم الوظيفي سيكون محدودًا للغاية بدون المهارات الناعمة."
+                ],
+                slide5: [
+                    "يظهر بحثنا بوضوح أن <span class='highlight'>العمل الجاد والمعرفة الفنية وحدها غير كافية</span> للنجاح الوظيفي. المحترفون الذين يزدهرون هم أولئك الذين يكملون خبراتهم بـ <span class='highlight'>تواصل قوي، وذكاء عاطفي، وقدرة على التكيف</span>."
+                ],
+                resources: {
+                    title: "مصادر موصى بها:",
+                    items: [
+                        "دليل المهارات الناعمة من Indeed",
+                        "The Muse: المهارات الناعمة الأساسية",
+                        "Forbes: أهم 7 مهارات ناعمة"
+                    ]
+                },
+                thanks: "شكرًا لكم",
+                university: "جامعة الدلتا التكنولوجية",
+                presenter: "قدمها: منتصر حمدي محمد عيد"
+            }
+        }
+    };
+
+    // Language switching functionality
+    const languageBtn = document.getElementById('languageBtn');
+    let currentLang = 'en';
+    
+    languageBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'ar' : 'en';
+        updateLanguage(currentLang);
+    });
+    
+    function updateLanguage(lang) {
+        // Update button text
+        languageBtn.innerHTML = lang === 'en' 
+            ? '<i class="fas fa-language"></i> عربي' 
+            : '<i class="fas fa-language"></i> English';
+        
+        // Update HTML direction and lang attribute
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', lang);
+        
+        // Update navigation
+        document.getElementById('nav-title').textContent = translations[lang].navTitle;
+        document.querySelectorAll('.nav-text').forEach((el, i) => {
+            el.textContent = translations[lang].navItems[i];
+        });
+        
+        // Update slide titles
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`slide${i}-title`).textContent = translations[lang].slideTitles[i-1];
+        }
+        
+        // Update speaker roles
+        document.querySelectorAll('.speaker-role').forEach((el, i) => {
+            el.textContent = translations[lang].speakerRoles[i];
+        });
+        
+        // Update content texts
+        for (let i = 1; i <= 5; i++) {
+            const slideContent = translations[lang].content[`slide${i}`];
+            const contentElements = document.querySelectorAll(`#slide${i} .content-text`);
+            
+            contentElements.forEach((el, j) => {
+                if (slideContent[j]) {
+                    el.innerHTML = slideContent[j];
+                }
+            });
+        }
+        
+        // Update resources section
+        document.getElementById('resources-title').textContent = translations[lang].content.resources.title;
+        document.querySelectorAll('.resource-text').forEach((el, i) => {
+            el.textContent = translations[lang].content.resources.items[i];
+        });
+        
+        // Update conclusion section
+        document.getElementById('thanks-text').textContent = translations[lang].content.thanks;
+        document.getElementById('university-name').textContent = translations[lang].content.university;
+        document.getElementById('presenter-name').textContent = translations[lang].content.presenter;
+    }
+    
+    // Activate navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.slide');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Animate elements on scroll
+    const animateElements = document.querySelectorAll('.animate__animated');
+    
+    const animateOnScroll = () => {
+        animateElements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                const animationClass = element.classList[1];
+                element.classList.add(animationClass);
+            }
+        });
+    };
+    
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+</script>
+</body>
+</html>
